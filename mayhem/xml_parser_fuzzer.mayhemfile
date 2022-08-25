@@ -1,0 +1,4 @@
+project: PROJECT
+target: xml_parser_fuzzer
+cmds:
+- cmd: /out/xml_parser_fuzzer
