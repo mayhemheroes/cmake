@@ -15,7 +15,8 @@
 ################################################################################
 
 FROM gcr.io/oss-fuzz-base/base-builder
-RUN apt-get update && apt-get install -y make autoconf automake libtool pkg-config libssl-dev
+RUN apt-get update && apt-get install -y make autoconf automake libtool pkg-config libssl-dev \
+    libarchive-dev zlib1g-dev libbz2-dev libzstd-dev liblzma-dev
 COPY . CMake
 RUN rm -rf CMake/mayhem
 RUN git clone --depth 1 https://github.com/strongcourage/fuzzing-corpus
@@ -23,7 +24,7 @@ WORKDIR CMake
 COPY mayhem/build.sh $SRC/
 # This is to fix Fuzz Introspector build by using LLVM old pass manager
 # re https://github.com/ossf/fuzz-introspector/issues/305
-ENV OLD_LLVMPASS 1
+ENV OLD_LLVMPASS=1
 
 ENV FUZZING_LANGUAGE=c SANITIZER=address
 RUN compile

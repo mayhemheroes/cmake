@@ -17,7 +17,8 @@
 
 # Build CMake.
 mkdir build-dir && cd build-dir
-../bootstrap && make -j$(nproc)
+cmake .. -DCMAKE_USE_SYSTEM_LIBARCHIVE=ON
+make -j$(nproc)
 
 
 # Build fuzzers.
